@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: Bored API
+  version: "1.0"
+servers:
+- url: http://localhost:8080
+paths:
+  /api/activity:
+    get:
+      parameters:
+      - description: Type of activity
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+          description: A random activity
+      summary: Get a random activity
+      x-accepts:
+      - application/json
+components:
+  schemas:
+    Activity:
+      example:
+        activity: activity
+        accessibility: 1.4658129
+        price: 6.0274563
+        link: link
+        type: type
+        key: key
+        participants: 0
+      properties:
+        activity:
+          type: string
+        type:
+          type: string
+        participants:
+          type: integer
+        price:
+          format: float
+          type: number
+        link:
+          type: string
+        key:
+          type: string
+        accessibility:
+          format: float
+          type: number
+      type: object
+
