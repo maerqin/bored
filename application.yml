@@ -1,0 +1,10 @@
+server:
+  port : 8081
+spring:
+  main:
+    web-application-type: none
+  shell:
+    interactive:
+      enabled: true
+    script:
+      enabled: true
