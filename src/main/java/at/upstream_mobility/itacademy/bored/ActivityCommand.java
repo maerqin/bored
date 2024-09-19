@@ -4,6 +4,11 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+/**
+ * Shell commands for interacting with the Bored API.
+ *
+ * <p>This component defines command-line commands for retrieving activities.</p>
+ */
 @ShellComponent
 public class ActivityCommand {
 
@@ -14,15 +19,26 @@ public class ActivityCommand {
     }
 
     /**
-     * Retrieves an activity. Optionally filters by type.
+     * Retrieves an activity from the Bored API.
      *
-     * @param type The type of activity (optional).
-     * @return The activity description.
+     * <p>This command fetches an activity, optionally filtered by the specified type.</p>
+     *
+     * @param type the type of activity to filter by (optional)
+     * @return the description of the activity
      */
     @ShellMethod("Get an activity.")
     public String get(
             @ShellOption(defaultValue = "", valueProvider = TypeValueProvider.class) String type
     ) {
-        return boredApiClient.getActivity(type);
+        String result;
+        try {
+            result = boredApiClient.getActivity(type);
+            if (result == null) {
+                result = "Error retrieving activity: Result is null";
+            }
+        } catch (Exception e) {
+            result = "Error retrieving activity: " + e.getMessage();
+        }
+        return result;
     }
 }

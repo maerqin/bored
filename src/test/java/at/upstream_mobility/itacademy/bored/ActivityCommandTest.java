@@ -1,16 +1,13 @@
 package at.upstream_mobility.itacademy.bored;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.util.AssertionErrors;
 
 @SpringBootTest
 @Import(ActivityCommand.class)
@@ -36,5 +33,21 @@ public class ActivityCommandTest {
 
         String result = activityCommand.get(null);
         assertEquals("Take a walk in the park", result);
+    }
+
+    @Test
+    public void testGetCommandWithInvalidType() {
+        when(boredApiClient.getActivity("invalidType")).thenReturn("No activity found!");
+
+        String result = activityCommand.get("invalidType");
+        assertEquals("No activity found!", result);
+    }
+
+    @Test
+    public void testGetCommandWithApiException() {
+        when(boredApiClient.getActivity("education")).thenThrow(new RuntimeException("API error"));
+
+        String result = activityCommand.get("education");
+        assertTrue(result.contains("Error retrieving activity"), "Unexpected result message");
     }
 }

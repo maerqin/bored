@@ -59,6 +59,7 @@ tasks.named('test') {
 
 bootRun {
 	standardInput = System.in
+	jvmArgs = ['-Dorg.jline.terminal.type=xterm-256color']
 }
 
 jacoco {
