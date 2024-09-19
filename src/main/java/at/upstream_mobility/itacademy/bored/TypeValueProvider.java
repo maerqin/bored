@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Component
 public class TypeValueProvider implements ValueProvider {
 
-    private static final List<String> TYPES = Arrays.asList(
+    public static final List<String> TYPES = Arrays.asList(
             "education", "recreational", "social", "diy", "charity",
             "cooking", "relaxation", "music", "busywork"
     );

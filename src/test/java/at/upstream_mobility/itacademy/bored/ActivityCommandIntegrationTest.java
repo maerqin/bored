@@ -8,6 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 // Additional imports
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(properties = {
@@ -39,10 +40,12 @@ public class ActivityCommandIntegrationTest {
 
     @Test
     public void testGetCommandWithInvalidType() {
-        String result = activityCommand.get("invalidType");
-        assertNotNull(result, "Result is null");
-        assertTrue(result.contains("No activity found") || result.contains("Error retrieving activity"),
-                "Unexpected result message: " + result);
+        String invalidType = "invalidType";
+        String result = activityCommand.get(invalidType);
+
+        String expectedMessage = "Invalid activity type. Valid types are: " + String.join(", ", TypeValueProvider.TYPES);
+        assertEquals(expectedMessage, result);
+        verifyNoInteractions(boredApiClient); // Ensure the API client was not called
     }
 
     @Test

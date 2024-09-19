@@ -30,6 +30,11 @@ public class ActivityCommand {
     public String get(
             @ShellOption(defaultValue = "", valueProvider = TypeValueProvider.class) String type
     ) {
+        // Validate the type
+        if (!type.isEmpty() && !TypeValueProvider.TYPES.contains(type)) {
+            return "Invalid activity type. Valid types are: " + String.join(", ", TypeValueProvider.TYPES);
+        }
+
         String result;
         try {
             result = boredApiClient.getActivity(type);

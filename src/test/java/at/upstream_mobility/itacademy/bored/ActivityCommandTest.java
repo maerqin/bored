@@ -1,6 +1,7 @@
 package at.upstream_mobility.itacademy.bored;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
@@ -29,18 +30,21 @@ public class ActivityCommandTest {
 
     @Test
     public void testGetCommandWithoutType() {
-        when(boredApiClient.getActivity(null)).thenReturn("Take a walk in the park");
+        when(boredApiClient.getActivity("")).thenReturn("Take a walk in the park");
 
-        String result = activityCommand.get(null);
+        String result = activityCommand.get("");
         assertEquals("Take a walk in the park", result);
     }
 
     @Test
     public void testGetCommandWithInvalidType() {
-        when(boredApiClient.getActivity("invalidType")).thenReturn("No activity found!");
+        String expectedMessage = "Invalid activity type. Valid types are: " + String.join(", ", TypeValueProvider.TYPES);
+        when(boredApiClient.getActivity(null)).thenReturn(expectedMessage);
 
-        String result = activityCommand.get("invalidType");
-        assertEquals("No activity found!", result);
+        String invalidType = "invalidType";
+        String result = activityCommand.get(invalidType);
+
+        assertEquals(expectedMessage, result);
     }
 
     @Test
@@ -50,4 +54,5 @@ public class ActivityCommandTest {
         String result = activityCommand.get("education");
         assertTrue(result.contains("Error retrieving activity"), "Unexpected result message");
     }
+
 }
