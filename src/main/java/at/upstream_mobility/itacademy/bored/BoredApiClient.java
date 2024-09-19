@@ -19,7 +19,7 @@ public class BoredApiClient {
 
     public BoredApiClient() {
         ApiClient client = new ApiClient();
-        client.setBasePath("http://localhost:8080");
+        client.setBasePath("https://bored.api.lewagon.com");
         this.apiInstance = new DefaultApi(client);
     }
 

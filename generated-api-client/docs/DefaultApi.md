@@ -1,6 +1,6 @@
 # DefaultApi
 
-All URIs are relative to *http://localhost:8080*
+All URIs are relative to *https://bored.api.lewagon.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -25,7 +25,7 @@ import org.openapitools.client.api.DefaultApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost:8080");
+    defaultClient.setBasePath("https://bored.api.lewagon.com");
 
     DefaultApi apiInstance = new DefaultApi(defaultClient);
     String type = "type_example"; // String | Type of activity

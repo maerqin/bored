@@ -1,9 +1,9 @@
 openapi: 3.0.0
 info:
   title: Bored API
-  version: "1.1"
+  version: "1.2"
 servers:
-- url: http://localhost:8080
+- url: https://bored.api.lewagon.com
 paths:
   /api/activity:
     get:
