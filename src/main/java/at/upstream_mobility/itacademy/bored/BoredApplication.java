@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BoredApplication {
 
 	public static void main(String[] args) {
+		// Excluded from code coverage due to technical limitations with JaCoCo
 		SpringApplication.run(BoredApplication.class, args);
 	}
 }

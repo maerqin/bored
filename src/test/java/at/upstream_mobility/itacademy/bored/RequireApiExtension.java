@@ -16,23 +16,11 @@ public class RequireApiExtension implements BeforeAllCallback {
      * Checks if the Bored API is accessible before all tests in the test class.
      *
      * @param context the extension context
-     * @throws Exception if the Bored API is not available
      */
-    private static boolean apiAvailable;
-
     @Override
     public void beforeAll(ExtensionContext context) {
         RestTemplate restTemplate = new RestTemplate();
-        try {
-            restTemplate.getForObject("http://localhost:8080/api/activity", String.class);
-            apiAvailable = true;
-        } catch (RestClientException e) {
-            apiAvailable = false;
-        }
+        restTemplate.getForObject("http://localhost:8080/api/activity", String.class);
         // Do not throw an exception here; let the tests handle the API availability
-    }
-
-    public static boolean isApiAvailable() {
-        return apiAvailable;
     }
 }

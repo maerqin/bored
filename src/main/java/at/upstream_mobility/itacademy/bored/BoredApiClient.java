@@ -23,6 +23,10 @@ public class BoredApiClient {
         this.apiInstance = new DefaultApi(client);
     }
 
+    public BoredApiClient(DefaultApi apiInstance) {
+        this.apiInstance = apiInstance;
+    }
+
     /**
      * Retrieves an activity from the Bored API, optionally filtered by type.
      *
@@ -48,7 +52,7 @@ public class BoredApiClient {
             logger.error("Error retrieving activity", e);
             return "Error retrieving activity: " + e.getMessage();
         } catch (Exception e) {
-            logger.error("API is unavailable", e);
+            logger.error("Error retrieving activity", e);
             return "Error retrieving activity: API is unavailable";
         }
     }
